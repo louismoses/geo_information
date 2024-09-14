@@ -8,7 +8,7 @@
 3. pnpm install
 4. pnpm run dev
 
-### Backend
+### Backend Laravel
 
 5. cd laravel_server
 6. copy .env.example to .env
