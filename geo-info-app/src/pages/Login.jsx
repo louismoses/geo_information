@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { login } from "../api/login";
+import login from "../api/login";
 import { useNavigate } from "react-router-dom";
 import useUserStore from "../store/useUserStore";
 
