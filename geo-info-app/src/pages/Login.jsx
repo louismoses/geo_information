@@ -16,13 +16,14 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(input);
+    const res = await login(input.email, input.password);
+    console.log(res.data);
   };
   return (
     <div className="grid grid-flow-col h-screen">
-      <div className="bg-red-300">img</div>
+      <div className="bg-sky-500"></div>
       <div className="grid items-center place-content-center">
         <div className="flex flex-col md:min-w-[400px] p-4">
           <h2
