@@ -1,12 +1,17 @@
 import React from "react";
 import { useState } from "react";
 import { login } from "../api/login";
+import { useNavigate } from "react-router-dom";
+import useUserStore from "../store/useUserStore";
 
 const Login = () => {
   const [input, setInput] = useState({
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
+  const { storeUser } = useUserStore();
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -19,7 +24,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await login(input.email, input.password);
-    console.log(res.data);
+    if (res.status === 200) {
+      console.log(res.data);
+      storeUser(res.data.token, res.data.user);
+      navigate("/home");
+    }
   };
   return (
     <div className="grid grid-flow-col h-screen">
