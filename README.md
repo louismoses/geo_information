@@ -11,7 +11,7 @@
 ### Backend
 
 5. cd laravel_server
-6. copy .env.example to .env.local
+6. copy .env.example to .env
 7. composer install
 8. php artisan migrate --seed
 9. php artisan serve
