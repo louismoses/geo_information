@@ -72,6 +72,9 @@ const Login = () => {
               Login
             </button>
           </form>
+          <p className=" text-center py-4 italic text-neutral-300">
+            email: test@example.com <br /> password: password
+          </p>
         </div>
       </div>
     </div>
