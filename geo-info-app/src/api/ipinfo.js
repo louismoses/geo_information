@@ -5,8 +5,7 @@ const ipInfo = async () => {
     const response = await axios.get(
       `https://ipinfo.io/json?token=${ipInfoToken}`
     );
-    console.log(response);
-    // return response;
+    return response;
   } catch (error) {
     return error.response;
   }

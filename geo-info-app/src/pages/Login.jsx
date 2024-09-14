@@ -25,7 +25,6 @@ const Login = () => {
     e.preventDefault();
     const res = await login(input.email, input.password);
     if (res.status === 200) {
-      console.log(res.data);
       storeUser(res.data.token, res.data.user);
       navigate("/home");
     }
