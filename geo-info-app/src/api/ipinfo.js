@@ -1,10 +1,11 @@
 import axios from "axios";
-const ipInfo = async () => {
+const ipInfo = async (ip) => {
   const ipInfoToken = import.meta.env.VITE_IP_INFO_TOKEN;
   try {
-    const { data } = await axios.get(
-      `https://ipinfo.io/json?token=${ipInfoToken}`
-    );
+    const endPoint = ip
+      ? `https://ipinfo.io/${ip}?token=${ipInfoToken}`
+      : `https://ipinfo.io/json?token=${ipInfoToken}`;
+    const { data } = await axios.get(endPoint);
 
     return data;
   } catch (error) {
