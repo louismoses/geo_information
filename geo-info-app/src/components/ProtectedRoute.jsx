@@ -1,10 +1,10 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import useUserStore from "../store/useUserStore";
+import Cookies from "js-cookie";
+
+const token = Cookies.get("token");
 
 const ProtectedRoute = ({ element }) => {
-  const { token } = useUserStore();
-
   if (!token) {
     return <Navigate to="/" />;
   }

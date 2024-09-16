@@ -2,7 +2,8 @@ import React from "react";
 import { useState } from "react";
 import login from "../api/login";
 import { useNavigate } from "react-router-dom";
-import useUserStore from "../store/useUserStore";
+import { useMutation } from "@tanstack/react-query";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const [input, setInput] = useState({
@@ -11,7 +12,18 @@ const Login = () => {
   });
 
   const navigate = useNavigate();
-  const { storeUser } = useUserStore();
+
+  const mutation = useMutation({
+    mutationKey: ["login"],
+    mutationFn: async () => {
+      const response = await login(input.email, input.password);
+      Cookies.set("token", response.data.token, { expires: 1 });
+      // localStorage.setItem("user", JSON.stringify(response.data.user));
+    },
+    onSuccess: () => {
+      navigate("/home");
+    },
+  });
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -21,14 +33,11 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const res = await login(input.email, input.password);
-    if (res.status === 200) {
-      storeUser(res.data.token, res.data.user);
-      navigate("/home");
-    }
+    mutation.mutate();
   };
+
   return (
     <div className="grid grid-flow-col h-screen">
       <div className="bg-sky-500"></div>

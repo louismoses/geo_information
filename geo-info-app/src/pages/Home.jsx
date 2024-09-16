@@ -1,24 +1,29 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ipInfo from "../api/ipinfo";
-import useIpInfoStore from "../store/useIpInfoStore";
+import { useQuery } from "@tanstack/react-query";
 
 const Home = () => {
-  const { storeIpInfo } = useIpInfoStore();
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["ipInfo"],
+    queryFn: async () => {
+      const data = await ipInfo();
+      console.log(data);
+      return data;
+    },
+    onSuccess: () => {
+      console.log(data);
+    },
+    error: (error) => {
+      console.log(error);
+    },
+  });
 
-  useEffect(() => {
-    const fetchIpInfo = async () => {
-      try {
-        const res = await ipInfo();
-        console.log(res);
-        storeIpInfo(res.data);
-      } catch (error) {
-        console.error("Error fetching IP info:", error);
-      }
-    };
-
-    fetchIpInfo();
-  }, [storeIpInfo]);
-  return <div>Home</div>;
+  return (
+    <div>
+      <h1>Home</h1>
+      <p>{data.ip}</p>
+    </div>
+  );
 };
 
 export default Home;
