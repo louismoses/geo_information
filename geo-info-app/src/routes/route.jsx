@@ -1,18 +1,21 @@
-import { createBrowserRouter } from "react-router-dom";
-
+import React from "react";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
-import ProtectedRoute from "../components/ProtectedRoute";
+import AuthRedirect from "../components/AuthRedirect";
 
-const router = createBrowserRouter([
+const routes = [
   {
     path: "/",
-    element: <Login />,
+    element: <AuthRedirect />,
   },
   {
     path: "/home",
-    element: <ProtectedRoute element={<Home />} />,
+    element: <Home />,
   },
-]);
+  {
+    path: "/login",
+    element: <Login />,
+  },
+];
 
-export default router;
+export default routes;

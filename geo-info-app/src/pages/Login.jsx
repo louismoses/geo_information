@@ -18,7 +18,6 @@ const Login = () => {
     mutationFn: async () => {
       const response = await login(input.email, input.password);
       Cookies.set("token", response.data.token, { expires: 1 });
-      // localStorage.setItem("user", JSON.stringify(response.data.user));
     },
     onSuccess: () => {
       navigate("/home");
