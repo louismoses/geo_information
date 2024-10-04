@@ -17,6 +17,9 @@ const Login = () => {
     mutationKey: ["login"],
     mutationFn: async () => {
       const response = await login(input.email, input.password);
+      if (!response || !response.data || !response.data.token) {
+        throw new Error("Invalid login response");
+      }
       Cookies.set("token", response.data.token, { expires: 1 });
     },
     onSuccess: () => {
