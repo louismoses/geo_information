@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 const ProtectedRoute = ({ children }) => {
   const token = Cookies.get("token");
 
-  if (!token) {
+  if (token === null || token === undefined) {
     return <Navigate to="/" />;
   }
 
